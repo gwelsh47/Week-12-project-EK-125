@@ -1,0 +1,1 @@
+Day ExerciseType PreworkoutHR PostworkoutHR Duration Intensity
