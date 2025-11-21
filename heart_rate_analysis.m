@@ -4,21 +4,25 @@
 % Roles: Algorithm Developer , Data Manager, Visualization Specialist
 %
 %
+
 % Description:
 %   This script loads athlete workout data from CSV files.
 %   It figures out which "heart rate zone" each workout was in (Resting, Light, etc.).
 %   It calculates important stats like how well they recover, how consistent they are, and how much total time they spent working out.
 %   And it saves all these results so we can make charts later.
 %
+
 % Inputs:
 %   - Data/Athletes/athlete1_beginner.csv
 %   - Data/Athletes/athlete2_intermediate.csv % subject to change, dum data
 %   filler
 %   - Data/Athletes/athlete3_advanced.csv
 %
+
 % Outputs:
 %   - Results/heart_rate_analysis.mat (Variables saved for plotting)
 %   - Results/athlete_summary.csv (Table of final stats)
+
 
 %% Setup Section
 clear; clc; close all; % Clear old variables and command window
@@ -33,7 +37,7 @@ if ~isfolder(resultsDir) % results folder
     mkdir(resultsDir);
 end
 
-%% Task 1: Load Data
+%% Data Loading
 fileNames = {'beginnerAthlete.csv', 'intermediateAthlete.csv', 'advancedAthlete.csv'}; 
 athleteNames = {'Beginner', 'Intermediate', 'Advanced'};
 
@@ -70,7 +74,8 @@ for i = 1:length(fileNames)
         error('File not found: %s', filePath);
     end
 end
-%% Task 2 & 3: Heart Rate Zone Categorization & Time Calculation
+
+%% Heart Rate Zone Categorization & Time Calculation
 
 % Rows = Athletes (3), Columns = Zones (4)
 % Zones: 1=Resting, 2=Light, 3=Moderate, 4=Vigorous
@@ -100,7 +105,7 @@ for i = 1:length(athleteData)
     timeInZones(i, 4) = sum(data.Duration(isVigorous));
 end
 
-%% Task 4: Calculate Recovery Rate
+%% Recovery Rate Calculation
 % Recovery Rate = How much HR dropped (PostWorkoutHR - PreWorkoutHR)
 % Lower numbers usually mean better fitness.
 avgRecoveryRate = zeros(3, 1);
@@ -112,9 +117,9 @@ for i = 1:length(athleteData)
     avgRecoveryRate(i) = mean(rawRecovery); % the average of those differences
 end
 
-%% Task 5: Basic Statistics
-% We need to calculate stats, but ignore the "Rest" days.
-avgPostHR = zeros(3, 1);
+%% Basic Statistics
+% calculate stats, but ignores the "Rest" days
+avgPostHR = zeros(3, 1); 
 avgDuration = zeros(3, 1);
 consistency = zeros(3, 1); % This will be the Standard Deviation of Intensity
 totalWorkouts = zeros(3, 1);
@@ -135,7 +140,7 @@ for i = 1:length(athleteData)
     totalMinutes(i) = sum(data.Duration); %Sum up all minutes spent working out (Rest days add 0 anyway)
 end
 
-%% Task 6: Save Results
+%% Results
 
  % Summary table to display
 summaryTable = table(athleteNames', avgPostHR, totalMinutes, consistency, ... 
@@ -153,20 +158,23 @@ save(matFile, 'timeInZones', 'avgRecoveryRate', 'avgPostHR', 'avgDuration', ...
      'consistency', 'totalWorkouts', 'totalMinutes', 'athleteNames', 'athleteData'); % Saves variables to a .mat file
 fprintf('Workspace variables saved to: %s\n', matFile);
 
-%% Comparative Analysis Findings ( questions to answer after real data stuff is inputted and I can do more analysis. ) 
-% (Project questions below based on the results)
+%% Comparative Analysis Findings 
 
 % 1. Which athlete spent the most time in vigorous zone?
-% Answer: [should be in the 4th column of 'timeInZones'. probably the Advanced athlete.]
+% Answer: 
+[should be in the 4th column of 'timeInZones'. probably the Advanced athlete.
 
 % 2. Which athlete has the most consistent training?
-% Answer: [should be in 'Consistency' column. The lower number is the best.]
+% Answer:
+[should be in 'Consistency' column. The lower number is the best.
 
 % 3. Which athlete has the best cardiovascular efficiency?
-% Answer: [Look at avgRecoveryRate. Lower is better efficiency.]
+% Answer: 
+[Look at avgRecoveryRate. Lower is better efficiency.
 
 % 4. How do workout patterns differ between fitness levels?
-% Beginners are generally random. While Advanceds will be consistent and with more intensity.]
+% Beginners are generally random. While Advanceds will be consistent and with more intensity.
+
 
 
 
