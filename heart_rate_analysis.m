@@ -1,28 +1,24 @@
 % HEART_RATE_ANALYSIS - analysis
-
-% Team Members: Saul, Graham, James
-% Roles: Algorithm Developer , Data Manager, Visualization Specialist
-
-
-% Description:
-%   This script loads athlete workout data from CSV files.
-%   It figures out which "heart rate zone" each workout was in (Resting, Light, etc.).
-%   It calculates important stats like how well they recover, how consistent they are, and how much total time they spent working out.
-%   And it saves all these results so we can make charts later.
+%{
+ Team Members: Saul, Graham, James
+ Roles: Algorithm Developer , Data Manager, Visualization Specialist
 
 
-% Inputs:
-%   - Data/Athletes/athlete1_beginner.csv
-%   - Data/Athletes/athlete2_intermediate.csv % subject to change, dum data
-%   filler
-%   - Data/Athletes/athlete3_advanced.csv
+Description:
+  This script loads athlete workout data from CSV files.
+  It figures out which "heart rate zone" each workout was in (Resting, Light, etc.).
+  It calculates important stats like how well they recover, how consistent they are, and how much total time they spent working out.
+  And it saves all these results so we can make charts later.
 
+Inputs:
+  - Data/Athletes/athlete1_beginner.csv
+  - Data/Athletes/athlete2_intermediate.csv 
+  - Data/Athletes/athlete3_advanced.csv
 
-% Outputs:
-%   - Results/heart_rate_analysis.mat (Variables saved for plotting)
-%   - Results/athlete_summary.csv (Table of final stats)
-
-
+Outputs:
+  - Results/heart_rate_analysis.mat (Variables saved for plotting)
+  - Results/athlete_summary.csv (Table of final stats)
+%}
 %% Setup Section
 clear; clc; close all; % Clear old variables and command window
 
@@ -158,23 +154,23 @@ save(matFile, 'timeInZones', 'avgRecoveryRate', 'avgPostHR', 'avgDuration', ...
 fprintf('Workspace variables saved to: %s\n', matFile);
 
 
-%% Comparative Analysis Findings 
+%{
+Comparative Analysis Findings (based on results)
 
-% 1. Which athlete spent the most time in vigorous zone?
-% Answer: The Advanced athlete spent the most time in the vigorous zone. 
-% This is confirmed by column 4 of the 'timeInZones' matrix, which corresponds to heart rates > 160 bpm.
+1. Which athlete spent the most time in vigorous zone?
+Answer: should be in the 4th column of 'timeInZones'. probably the Advanced athlete.
 
-% 2. Which athlete has the most consistent training?
-% Answer: The Advanced athlete has the most consistent training.
-% This is shown by having the lowest value in the 'Consistency' column (Standard Deviation of Intensity), indicating their workout intensity varies the least.
+2. Which athlete has the most consistent training?
+Answer: should be in 'Consistency' column. The lower number is the best.
 
-% 3. Which athlete has the best cardiovascular efficiency?
-% Answer:The Advanced athlete shows the best cardiovascular efficiency.
-% They have the highest recovery rate (difference between Post and Pre workout HR), indicating their heart responds robustly to exercise demand.
+3. Which athlete has the best cardiovascular efficiency?
+Answer: Look at avgRecoveryRate. Lower is better efficiency.
 
-% 4. How do workout patterns differ between fitness levels?
-% Answer: The Beginner athlete shows sporadic, lower-intensity workouts with 
-% frequent rest days. The Intermediate athlete is more regular. The Advanced athlete shows a highly consistent pattern of daily, high-intensity, and longer-duration workouts.
+4. How do workout patterns differ between fitness levels?
+Answer: Beginners are generally random. While Advanceds will be consistent and with more intensity.
+
+%}
+
 
 
 
