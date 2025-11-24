@@ -44,7 +44,7 @@ for i = 1:length(fileNames)
         T = readtable(filePath);
         
         % 2. Fix capitalization (PostworkoutHR -> PostWorkoutHR)
-        % This prevents the "Dot indexing" error you saw
+        % This prevents the "Dot indexing" 
         oldNames = T.Properties.VariableNames;
         newNames = oldNames;
         
@@ -170,6 +170,7 @@ Answer: Look at avgRecoveryRate. Lower is better efficiency.
 Answer: Beginners are generally random. While Advanceds will be consistent and with more intensity.
 
 %}
+
 
 
 
